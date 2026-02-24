@@ -13,7 +13,7 @@ public class Filme {
         this.aluguel = arg1;
     }
 
-    public int getAuguel() {
+    public int getAluguel() {
         return aluguel;
     }
 

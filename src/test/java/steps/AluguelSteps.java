@@ -15,30 +15,35 @@ public class AluguelSteps {
     private Filme filme;
     private AluguelService aluguel = new AluguelService();
     private NotaAluguel nota;
+    private String erro;
 
-    @Dado("um filme com estoque de {int} unidades")
-    public void um_filme_com_estoque_de_unidades(int int1) {
+    @Dado("^um filme com estoque de (\\d+) unidades$")
+    public void filme_com_estoque_de_unidades(int arg1) throws Throwable {
         filme = new Filme();
-        filme.setEstoque(int1);
+        filme.setEstoque(arg1);
     }
 
-    @Dado("que o preço do aluguel seja R$ {int}")
-    public void que_o_preço_do_aluguel_seja_r$(int int1) {
-        filme.setAluguel(int1);
+    @Dado("^que o preço do aluguel seja R\\$ (\\d+)$")
+    public void que_o_preço_do_aluguel_seja_r$(int arg1) throws Throwable {
+        filme.setAluguel(arg1);
     }
 
-    @Quando("alugar")
-    public void alugar() {
-        nota = aluguel.alugar(filme);
+    @Quando("^alugar$")
+    public void alugar() throws Throwable {
+        try {
+            nota = aluguel.alugar(filme);
+        } catch (RuntimeException e) {
+            erro = e.getMessage();
+        }
     }
 
-    @Entao("o preço do  aluguel será R$ {int}")
-    public void o_preço_do_aluguel_será_r$(int int1) {
-        Assert.assertEquals(int1, nota.getPreco());
+    @Entao("^o preço do  aluguel será R\\$ (\\d+)$")
+    public void o_preço_do_aluguel_será_r$(int arg1) throws Throwable {
+        Assert.assertEquals(arg1, nota.getPreco());
     }
 
-    @Entao("a data de entrega será no dia seguinte")
-    public void a_data_de_entrega_será_no_dia_seguinte() {
+    @Entao("^a data de entrega será no dia seguinte")
+    public void a_data_de_entrega_será_no_dia_seguinte() throws Throwable {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DAY_OF_MONTH, 1);
 
@@ -52,10 +57,14 @@ public class AluguelSteps {
 
     }
 
-    @Entao("o estoque do filme será {int} unidade")
-    public void o_estoque_do_filme_será_unidade(int int1) {
-        Assert.assertEquals(int1, filme.getEstoque());
+    @Entao("^o estoque do filme será (\\d+) unidade$")
+    public void o_estoque_do_filme_será_unidade(int arg1) throws Throwable {
+        Assert.assertEquals(arg1, filme.getEstoque());
     }
 
+    @Entao("^não será possivel por falta de estoque")
+    public void não_será_possivel_por_falta_de_estoque() throws Throwable {
+        Assert.assertEquals("Filme sem Estoque", erro);
+    }
 }
 
