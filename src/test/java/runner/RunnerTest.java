@@ -6,11 +6,11 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/features",
+        features = "classpath:features",
         glue = "steps",
-        tags = "@positivo",
-        plugin = "pretty",
-        monochrome = false
+        tags = "",
+        plugin = {"pretty"},
+        monochrome = true
 )
 public class RunnerTest {
 }

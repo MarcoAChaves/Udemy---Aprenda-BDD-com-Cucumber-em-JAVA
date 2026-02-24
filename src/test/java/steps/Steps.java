@@ -31,17 +31,17 @@ public class Steps {
     private int contador = 0;
 
     @Given("o valor do contador e {int}")
-    public void o_valor_do_contador_e(Integer int1) throws Throwable {
+    public void o_valor_do_contador_e(int int1) throws Throwable {
         contador = int1;
     }
 
     @When("eu encrementar em {int}")
-    public void eu_encrementar_em(Integer int1) throws Throwable {
+    public void eu_encrementar_em(int int1) throws Throwable {
         contador = contador + int1;
     }
 
     @Then("o valor do contador sera {int}")
-    public void o_valor_do_contador_sera(Integer int1) throws Throwable {
+    public void o_valor_do_contador_sera(int int1) throws Throwable {
         System.out.println(int1);
         System.out.println(contador);
         Assert.assertTrue(int1 == contador);
@@ -50,7 +50,7 @@ public class Steps {
     Date entrega = new Date();
 
     @Given("que a entrega seria dia {int}\\/{int}\\/{int}")
-    public void que_a_entrega_seria_dia(Integer int1, Integer int2, Integer int3) throws Throwable {
+    public void que_a_entrega_seria_dia(int int1, Integer int2, Integer int3) throws Throwable {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DAY_OF_MONTH, int1);
         cal.set(Calendar.MONTH, int2 - 1);
@@ -59,7 +59,7 @@ public class Steps {
     }
 
     @When("a entrega atrasa em (\\d+) (dia|dias|mes|meses)$")
-    public void a_entrega_atrasa_em_dias(Integer int1, String tempo) throws Throwable {
+    public void a_entrega_atrasa_em_dias(int int1, String tempo) throws Throwable {
         Calendar cal = Calendar.getInstance();
         cal.setTime(entrega);
         if (tempo.equals("dias")) {
