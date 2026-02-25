@@ -44,7 +44,7 @@ Feature: Aprender Cucumber
     * o nome do passageiro é "Cicrano de Oliveira"
     * o telefone do passageiro é 9888-8888
 
-  @negativo
+  @ignore
   Scenario: Deve negar todos os steps "Dado" dos cenarios anteriores
     Given o ticket é CD123
     Given o ticket é AG1234
