@@ -35,3 +35,21 @@ Funcionalidade: Alugar Filme
     Entao o preço do aluguel será R$ 4
     E a data de entrega será em 1 dias
     E a pontuação recebida será de 1 pontos
+
+    #Aplicando o Data-Driven
+
+  Esquema do Cenario: Deve dar condições conforme o tipo de aluguel
+    Dado um filme com estoque de 2 unidades
+    E que o preço do aluguel seja R$ <preco>
+    E que o tipo do aluguel seja <tipo>
+    Quando alugar
+    Entao o preço do aluguel será R$ <valor>
+    E a data de entrega será em <qtdDias> dias
+    E a pontuação recebida será de <pontuacao> pontos
+
+    Exemplos:
+    | preco |    tipo   | valor | qtdDias | pontuacao |
+    |   4   | extendido |   8   |    3    |     2     |
+    |   4   |   comum   |   4   |    1    |     1     |
+    |   10  | extendido |   20  |    3    |     2     |
+    |   5   |  semanal  |   15  |    7    |     3     |
